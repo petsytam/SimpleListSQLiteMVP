@@ -28,7 +28,7 @@ class DBQuery(context: Context) {
         return dbHelper.checkDatabaseExist()
     }
 
-    fun getListFromDatabse(): ArrayList<CityDataModel> {
+    fun getListFirstFromDatabse(): ArrayList<CityDataModel> {
         sqliteDB = dbHelper.writableDatabase
         val arrayList = arrayListOf<CityDataModel>()
         val querySelect = "SELECT * FROM cities"
@@ -72,6 +72,29 @@ class DBQuery(context: Context) {
         return listCity
     }
 
+    fun getListLastFromDatabse(): ArrayList<CityDataModel> {
+        sqliteDB = dbHelper.writableDatabase
+        val arrayList = arrayListOf<CityDataModel>()
+        val querySelect = "SELECT * FROM cities"
+        val cursor = sqliteDB!!.rawQuery(querySelect, null)
+        cursor?.moveToLast()
+        var count = 0
+        while (count++ < 100) {
+            arrayList.add(
+                CityDataModel(
+                    cursor.getString(ID),
+                    cursor.getString(COUNTRY),
+                    cursor.getString(CITY),
+                    cursor.getInt(POPULATION)
+                )
+            )
+            cursor.moveToPrevious()
+        }
+        cursor.close()
+        sqliteDB!!.close()
+        return arrayList
+    }
+
     @Throws(SQLiteConstraintException::class)
     fun addNewCity(city: CityDataModel): Boolean {
         val db = dbHelper.writableDatabase
@@ -80,7 +103,7 @@ class DBQuery(context: Context) {
         values.put(COLUM_COUNTRY, city.country)
         values.put(COLUM_CITY, city.city)
         values.put(COLUM_POPULATION, city.population)
-        Log.d("---SQLite---","addNewCity: "+city.id)
+        Log.d("---SQLite---","addNewCity: ${city.id}")
         db.insert(TABLE_NAME, null, values)
         db.close()
         return true

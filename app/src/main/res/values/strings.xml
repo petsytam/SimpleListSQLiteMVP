@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Simple List MVP</string>
     <string name="add_record">Add 272128 Record</string>
+    <string name="show_last_record">Show Last Record</string>
 </resources>

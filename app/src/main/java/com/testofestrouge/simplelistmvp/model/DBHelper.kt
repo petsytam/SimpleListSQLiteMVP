@@ -59,6 +59,7 @@ class DBHelper(private val myContext: Context) : SQLiteOpenHelper(
                 isDBExist = true
             } catch (e: Exception) {
                 e.printStackTrace()
+                isDBExist = false
             }
 
         }
@@ -66,7 +67,6 @@ class DBHelper(private val myContext: Context) : SQLiteOpenHelper(
     }
 
     private fun copyDataBase() {
-
         try {
             val myInput = myContext.assets.open(DB_NAME)
             val outFileName = DB_PATH + DB_NAME
@@ -84,7 +84,6 @@ class DBHelper(private val myContext: Context) : SQLiteOpenHelper(
         } catch (e: Exception) {
             e.printStackTrace()
         }
-
     }
 
     fun checkDatabaseExist(): Boolean {

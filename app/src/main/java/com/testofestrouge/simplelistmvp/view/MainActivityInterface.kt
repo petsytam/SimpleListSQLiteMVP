@@ -16,5 +16,6 @@ interface MainActivityInterface {
         fun setDataToListView()
         fun loadNextPage(nextPage: Int?)
         fun addMoreRecord()
+        fun showLastRecord()
     }
 }

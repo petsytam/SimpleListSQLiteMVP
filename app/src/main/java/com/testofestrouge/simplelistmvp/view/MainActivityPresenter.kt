@@ -16,7 +16,7 @@ class MainActivityPresenter(view: MainActivityInterface.View) : MainActivityInte
     private var model = DBQuery(mainView as Context)
 
     override fun setDataToListView() {
-        val listCity = model.getListFromDatabse()
+        val listCity = model.getListFirstFromDatabse()
         mainView.setDataToListView(listCity)
     }
 
@@ -30,6 +30,11 @@ class MainActivityPresenter(view: MainActivityInterface.View) : MainActivityInte
     override fun addMoreRecord() {
         mainView.showProgress()
         Unitest().execute()
+    }
+
+    override fun showLastRecord() {
+        val listCity = model.getListLastFromDatabse()
+        mainView.updateDataToList(listCity)
     }
 
     @SuppressLint("StaticFieldLeak")

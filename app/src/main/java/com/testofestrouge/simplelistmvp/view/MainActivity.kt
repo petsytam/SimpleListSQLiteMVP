@@ -80,6 +80,9 @@ class MainActivity : AppCompatActivity(), MainActivityInterface.View {
             R.id.action_add -> {
                 presenterMain!!.addMoreRecord()
             }
+            R.id.action_show_last_record -> {
+                presenterMain!!.showLastRecord()
+            }
         }
         return true
     }
