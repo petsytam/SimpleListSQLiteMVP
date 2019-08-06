@@ -7,6 +7,7 @@ interface MainActivityInterface {
     interface View {
         fun showProgress()
         fun hideProgress()
+        fun setProgress(progress: Int,max: Int)
         fun setDataToListView(listCity: ArrayList<CityDataModel>)
         fun updateDataToList(listCity: ArrayList<CityDataModel>)
     }
@@ -14,5 +15,6 @@ interface MainActivityInterface {
     interface Presenter {
         fun setDataToListView()
         fun loadNextPage(nextPage: Int?)
+        fun addMoreRecord()
     }
 }
