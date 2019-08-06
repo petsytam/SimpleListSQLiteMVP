@@ -1,14 +1,14 @@
-package com.testofestrouge.simplelistmvp
+package com.testofestrouge.simplelistmvp.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.View
+import com.testofestrouge.simplelistmvp.R
 import kotlinx.android.synthetic.main.activity_splash.*
 
-class SplashActivity : AppCompatActivity(),SplashInterface.View {
+class SplashActivity : AppCompatActivity(), SplashInterface.View {
 
     private var presenter: SplashPresenter? = null
 
@@ -23,10 +23,10 @@ class SplashActivity : AppCompatActivity(),SplashInterface.View {
 
     override fun gotoMainActivity() {
         Handler().postDelayed({
-            val it = Intent(this,MainActivity::class.java)
+            val it = Intent(this, MainActivity::class.java)
             startActivity(it)
             finish()
-        },1000)
+        }, 1000)
 
     }
 
@@ -39,7 +39,7 @@ class SplashActivity : AppCompatActivity(),SplashInterface.View {
         initData()
     }
 
-    private fun initData(){
+    private fun initData() {
         presenter?.loadDatabase()
     }
 

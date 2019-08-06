@@ -1,15 +1,18 @@
-package com.testofestrouge.simplelistmvp
+package com.testofestrouge.simplelistmvp.model
 
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
 import android.database.sqlite.SQLiteOpenHelper
-import android.util.Log
 import java.io.FileOutputStream
 import java.io.IOException
 
-class DBHelper(private val myContext: Context) : SQLiteOpenHelper(myContext, DB_NAME, null, DATABASE_VERSION){
+class DBHelper(private val myContext: Context) : SQLiteOpenHelper(
+    myContext,
+    DB_NAME, null,
+    DATABASE_VERSION
+) {
 
     private var myDataBase: SQLiteDatabase? = null
 
@@ -87,10 +90,10 @@ class DBHelper(private val myContext: Context) : SQLiteOpenHelper(myContext, DB_
             val outFileName = DB_PATH + DB_NAME
             val myOutput = FileOutputStream(outFileName)
             val buffer = ByteArray(1024)
-            var length: Int =myInput.read(buffer)
+            var length: Int = myInput.read(buffer)
             while (length > 0) {
                 myOutput.write(buffer, 0, length)
-                length=myInput.read(buffer)
+                length = myInput.read(buffer)
             }
 
             myOutput.flush()
@@ -102,20 +105,19 @@ class DBHelper(private val myContext: Context) : SQLiteOpenHelper(myContext, DB_
 
     }
 
-    fun checkDatabaseExist(): Boolean
-    {
+    fun checkDatabaseExist(): Boolean {
         return checkDataExist
     }
 
-    companion object{
-        val DB_PATH             = "/data/data/com.testofestrouge.simplelistmvp/databases/"
-        val DB_NAME             = "utopia_cities.db"
-        val DATABASE_VERSION    = 1
+    companion object {
+        val DB_PATH = "/data/data/com.testofestrouge.simplelistmvp/databases/"
+        val DB_NAME = "utopia_cities.db"
+        val DATABASE_VERSION = 1
 
-        val TABLE_NAME          = "cities"
-        val L_ID                = "id"
-        val L_COUNTRY           = "country"
-        val L_CITY              = "city"
-        val L_POPULATION        = "population"
+        val TABLE_NAME = "cities"
+        val L_ID = "id"
+        val L_COUNTRY = "country"
+        val L_CITY = "city"
+        val L_POPULATION = "population"
     }
 }

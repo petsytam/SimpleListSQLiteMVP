@@ -1,13 +1,13 @@
-package com.testofestrouge.simplelistmvp
+package com.testofestrouge.simplelistmvp.model
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
-import android.util.Log
 import java.io.IOException
 
 class DBQuery(context: Context) {
 
-    private val dbHelper: DBHelper = DBHelper(context)
+    private val dbHelper: DBHelper =
+        DBHelper(context)
     private var sqliteDB: SQLiteDatabase? = null
 
     init {
@@ -21,8 +21,7 @@ class DBQuery(context: Context) {
         }
     }
 
-    fun isDatabaseCreated(): Boolean
-    {
+    fun isDatabaseCreated(): Boolean {
         return dbHelper.checkDatabaseExist()
     }
 
@@ -30,15 +29,19 @@ class DBQuery(context: Context) {
         sqliteDB = dbHelper.writableDatabase
         val arrayList = arrayListOf<CityDataModel>()
         val querySelect = "SELECT * FROM cities"
-        val cursor = sqliteDB!!.rawQuery(querySelect,null)
+        val cursor = sqliteDB!!.rawQuery(querySelect, null)
         cursor?.moveToFirst()
         var count = 0
         //while (!cursor.isAfterLast) {
         while (count++ < 100) {
-            arrayList.add(CityDataModel(cursor.getString(ID),
-                cursor.getString(COUNTRY),
-                cursor.getString(CITY),
-                cursor.getInt(POPULATION)))
+            arrayList.add(
+                CityDataModel(
+                    cursor.getString(ID),
+                    cursor.getString(COUNTRY),
+                    cursor.getString(CITY),
+                    cursor.getInt(POPULATION)
+                )
+            )
             cursor.moveToNext()
         }
         cursor.close()
@@ -46,11 +49,11 @@ class DBQuery(context: Context) {
         return arrayList
     }
 
-    companion object{
-        const val ID            = 0
-        const val COUNTRY       = 1
-        const val CITY          = 2
-        const val POPULATION    = 3
+    companion object {
+        const val ID = 0
+        const val COUNTRY = 1
+        const val CITY = 2
+        const val POPULATION = 3
     }
 
 

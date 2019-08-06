@@ -1,38 +1,40 @@
-package com.testofestrouge.simplelistmvp
+package com.testofestrouge.simplelistmvp.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.testofestrouge.simplelistmvp.R
 import com.testofestrouge.simplelistmvp.adapter.CityAdapter
+import com.testofestrouge.simplelistmvp.model.CityDataModel
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity(), MainActivityInterface.View {
+
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var city: List<CityDataModel>
+    private lateinit var adapter: CityAdapter
+
+    private var presenterMain: MainActivityPresenter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        initData()
         initView()
 
+        presenterMain = MainActivityPresenter(this)
+        presenterMain!!.setDataToListView()
+
     }
 
-    private fun initData()
-    {
-        city = DBQuery(this).getListFromDatabse()
-    }
-
-    private fun initView()
-    {
+    private fun initView() {
         recyclerView = findViewById(R.id.recyclerView)
-
         recyclerView.layoutManager = LinearLayoutManager(this)
-
-        val adapter = CityAdapter()
+        adapter = CityAdapter()
         recyclerView.adapter = adapter
-        adapter.setCityList(city)
+    }
+
+    override fun setDataToListView(listCity: List<CityDataModel>) {
+        adapter.setCityList(listCity)
     }
 }

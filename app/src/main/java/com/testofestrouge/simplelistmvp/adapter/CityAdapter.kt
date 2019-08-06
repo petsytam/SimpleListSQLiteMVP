@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.testofestrouge.simplelistmvp.CityDataModel
+import com.testofestrouge.simplelistmvp.model.CityDataModel
 import com.testofestrouge.simplelistmvp.R
 import kotlinx.android.synthetic.main.list_item.view.*
 import java.text.NumberFormat
@@ -31,19 +31,18 @@ class CityAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    inner class CityListViewHolder(itemView: View): RecyclerView.ViewHolder(itemView)
-    {
-        fun bindView(cityData: CityDataModel)
-        {
+    inner class CityListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        fun bindView(cityData: CityDataModel) {
             itemView.tv_country.text = cityData.country
-            itemView.tv_city.text    = cityData.city
+            itemView.tv_city.text = cityData.city
             itemView.tv_population.text = formatText(cityData.population)
         }
 
-        private fun formatText(numberPopularion: Int):String{
+        private fun formatText(numberPopularion: Int): String {
             val number = numberPopularion.toDouble()
             val textFormat = NumberFormat.getPercentInstance().format(number)
-            return textFormat.replace("%","")
+            return textFormat.replace("%", "")
         }
     }
 }

@@ -1,10 +1,12 @@
-package com.testofestrouge.simplelistmvp
+package com.testofestrouge.simplelistmvp.view
 
 import android.annotation.SuppressLint
 import android.content.Context
 import android.os.AsyncTask
+import com.testofestrouge.simplelistmvp.model.DBQuery
 
-class SplashPresenter(view: SplashInterface.View) : SplashInterface.Presenter{
+class SplashPresenter(view: SplashInterface.View) :
+    SplashInterface.Presenter {
 
     private var splashView = view
     private var database: DBQuery? = null
@@ -14,7 +16,7 @@ class SplashPresenter(view: SplashInterface.View) : SplashInterface.Presenter{
     }
 
     @SuppressLint("StaticFieldLeak")
-    inner class LoadData(): AsyncTask<Any,Any,Boolean>(){
+    inner class LoadData() : AsyncTask<Any, Any, Boolean>() {
 
         override fun doInBackground(vararg p0: Any?): Boolean {
 
@@ -25,12 +27,9 @@ class SplashPresenter(view: SplashInterface.View) : SplashInterface.Presenter{
 
         override fun onPostExecute(result: Boolean) {
             super.onPostExecute(result)
-            if (result)
-            {
+            if (result) {
                 splashView.hideProgress()
-            }
-            else
-            {
+            } else {
                 splashView.showProgress()
             }
 
