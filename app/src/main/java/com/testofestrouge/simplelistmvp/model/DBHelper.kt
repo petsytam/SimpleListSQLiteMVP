@@ -36,24 +36,6 @@ class DBHelper(private val myContext: Context) : SQLiteOpenHelper(
 
     private var checkDataExist = false
 
-    fun openDataBase() {
-        try {
-            val myPath = DB_PATH + DB_NAME
-            myDataBase = SQLiteDatabase.openDatabase(myPath, null, SQLiteDatabase.OPEN_READWRITE)
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-    }
-
-    fun dataBase(): SQLiteDatabase? {
-        return myDataBase
-    }
-
-    fun getCursor(query: String): Cursor {
-        return myDataBase!!.rawQuery(query, null)
-    }
-
     @Synchronized
     override fun close() {
         if (myDataBase != null)
@@ -113,11 +95,5 @@ class DBHelper(private val myContext: Context) : SQLiteOpenHelper(
         val DB_PATH = "/data/data/com.testofestrouge.simplelistmvp/databases/"
         val DB_NAME = "utopia_cities.db"
         val DATABASE_VERSION = 1
-
-        val TABLE_NAME = "cities"
-        val L_ID = "id"
-        val L_COUNTRY = "country"
-        val L_CITY = "city"
-        val L_POPULATION = "population"
     }
 }

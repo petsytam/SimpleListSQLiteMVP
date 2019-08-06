@@ -5,10 +5,14 @@ import com.testofestrouge.simplelistmvp.model.CityDataModel
 interface MainActivityInterface {
 
     interface View {
-        fun setDataToListView(listCity: List<CityDataModel>)
+        fun showProgress()
+        fun hideProgress()
+        fun setDataToListView(listCity: ArrayList<CityDataModel>)
+        fun updateDataToList(listCity: ArrayList<CityDataModel>)
     }
 
     interface Presenter {
         fun setDataToListView()
+        fun loadNextPage(nextPage: Int?)
     }
 }

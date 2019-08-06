@@ -33,6 +33,7 @@ class SplashActivity : AppCompatActivity(), SplashInterface.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
+        supportActionBar?.hide()
 
         presenter = SplashPresenter(this)
 

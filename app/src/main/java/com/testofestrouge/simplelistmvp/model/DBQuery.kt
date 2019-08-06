@@ -25,7 +25,7 @@ class DBQuery(context: Context) {
         return dbHelper.checkDatabaseExist()
     }
 
-    fun getListFromDatabse(): List<CityDataModel> {
+    fun getListFromDatabse(): ArrayList<CityDataModel> {
         sqliteDB = dbHelper.writableDatabase
         val arrayList = arrayListOf<CityDataModel>()
         val querySelect = "SELECT * FROM cities"
@@ -47,6 +47,26 @@ class DBQuery(context: Context) {
         cursor.close()
         sqliteDB!!.close()
         return arrayList
+    }
+
+    fun getListCityPaging(limit: Int, offset: Int): ArrayList<CityDataModel>
+    {
+        val db = dbHelper.writableDatabase
+        val listCity = arrayListOf<CityDataModel>()
+        val query = "SELECT * FROM cities LIMIT $limit OFFSET $offset"
+        val cursor = db.rawQuery(query,null)
+        cursor.moveToFirst()
+        while (!cursor.isAfterLast)
+        {
+            listCity.add(CityDataModel(cursor.getString(ID),
+                cursor.getString(COUNTRY),
+                cursor.getString(CITY),
+                cursor.getInt(POPULATION)))
+            cursor.moveToNext()
+        }
+        cursor.close()
+        db.close()
+        return listCity
     }
 
     companion object {
